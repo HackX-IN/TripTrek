@@ -49,6 +49,7 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   const {user} = useSelector(state => state.user);
+  // console.log('userDetails:', user);
   const [trips, setTrips] = useState();
 
   const isFocused = useIsFocused();
@@ -144,7 +145,7 @@ export default function HomeScreen() {
               return (
                 <View className="bg-white p-3 rounded-2xl mb-3 shadow-sm">
                   <View
-                    className="flex flex-row justify-end items-end z-10"
+                    className="flex flex-row justify-end items-end z-10 mb-1"
                     onTouchEnd={() => removeTrip(item.id)}>
                     <TrashIcon color={'red'} size={23} />
                   </View>

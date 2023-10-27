@@ -137,7 +137,7 @@ export default function TripExpensesScreen(props) {
                 navigation.navigate('AddExpense', {id, place, country})
               }
               className="p-2 px-3 bg-white border border-gray-200 rounded-full">
-              <Text className={colors.heading}>Add Expense</Text>
+              <Text className={colors.heading}>Add Task</Text>
             </TouchableOpacity>
           </View>
           <View style={{height: 430}}>
