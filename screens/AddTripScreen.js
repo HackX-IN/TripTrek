@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import ScreenWrapper from '../components/screenWrapper';
@@ -35,7 +36,14 @@ export default function AddTripScreen() {
 
   const navigation = useNavigation();
   const handleAddTrip = async () => {
-    if (place && country && place.trim() !== '' && country.trim() !== '') {
+    if (
+      place &&
+      country &&
+      place.trim() !== '' &&
+      country.trim() !== '' &&
+      formattedDepartDate &&
+      formattedReturnDate
+    ) {
       try {
         setLoading(true);
         const docRef = await addDoc(tripsRef, {
@@ -69,7 +77,7 @@ export default function AddTripScreen() {
   return (
     <ScreenWrapper>
       <View className="flex justify-between h-full mx-4">
-        <View>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View className="relative mt-5">
             <View className="absolute top-0 left-0 z-10">
               <BackButton />
@@ -104,7 +112,17 @@ export default function AddTripScreen() {
               className="p-4 bg-white rounded-full mb-3"
             />
           </View>
-          <View style={styles.datePicker}>
+          <View className="space-y-2 mx-2 justify-between items-center flex-row">
+            <Text className={`${colors.heading} text-lg font-bold`}>
+              Start Date
+            </Text>
+            <Text className={`${colors.heading} text-lg font-bold right-1`}>
+              End Date
+            </Text>
+          </View>
+          <View
+            style={styles.datePicker}
+            className="p-4 bg-white rounded-full mb-3">
             <TouchableOpacity onPress={() => setShowDepartDatePicker(true)}>
               <Text>{departDate.toDateString()}</Text>
             </TouchableOpacity>
@@ -137,7 +155,7 @@ export default function AddTripScreen() {
               />
             )}
           </View>
-        </View>
+        </ScrollView>
 
         <View>
           {loading ? (

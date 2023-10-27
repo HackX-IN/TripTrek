@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import ScreenWrapper from '../components/screenWrapper';
 import {colors} from '../theme';
 import {useNavigation} from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+import LottieView from 'lottie-react-native';
 
 export default function WelcomScreen() {
   const navigation = useNavigation();
@@ -12,8 +12,10 @@ export default function WelcomScreen() {
     <ScreenWrapper>
       <View className="h-full flex justify-around">
         <View className="flex-row justify-center mt-10">
-          <Image
-            source={require('../assets/images/welcome.gif')}
+          <LottieView
+            source={require('../assets/images/banner2.json')}
+            autoPlay
+            loop
             className="h-96 w-96 shadow"
           />
         </View>

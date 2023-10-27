@@ -18,6 +18,8 @@ import {
 } from 'firebase/firestore';
 
 import {HeartIcon, TrashIcon} from 'react-native-heroicons/outline';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LottieView from 'lottie-react-native';
 
 // Dummy Items
 // const items = [
@@ -52,19 +54,24 @@ export default function HomeScreen() {
   const isFocused = useIsFocused();
 
   const fetchTrips = async () => {
-    const q = query(tripsRef, where('userId', '==', user.uid));
-    const querySnapshot = await getDocs(q);
-    let data = [];
-    querySnapshot.forEach(doc => {
-      // console.log('documement: ',doc.data());
-      data.push({...doc.data(), id: doc.id});
-    });
-    setTrips(data);
+    if (user && user.uid) {
+      // Check if user and user.uid are defined and not undefined
+      const q = query(tripsRef, where('userId', '==', user.uid));
+      const querySnapshot = await getDocs(q);
+      let data = [];
+      querySnapshot.forEach(doc => {
+        data.push({...doc.data(), id: doc.id});
+      });
+      setTrips(data);
+      console.log(data);
+    } else {
+      // Handle the case where user or user.uid is undefined
+      console.error('User or user.uid is undefined');
+    }
   };
 
   const removeTrip = async tripId => {
     try {
-      // Construct a reference to the document you want to delete
       const tripDocRef = doc(tripsRef, tripId);
 
       // Delete the document
@@ -83,6 +90,7 @@ export default function HomeScreen() {
 
   const handleLogout = async () => {
     await signOut(auth);
+    await AsyncStorage.removeItem('userAccessToken');
   };
   return (
     <ScreenWrapper className="flex-1">
@@ -97,9 +105,15 @@ export default function HomeScreen() {
         </TouchableOpacity>
       </View>
       <View className="flex-row justify-center items-center bg-blue-200 rounded-xl mx-4 mb-4">
-        <Image
+        {/* <Image
           source={require('../assets/images/banner.png')}
           className="w-60 h-60"
+        /> */}
+        <LottieView
+          source={require('../assets/images/earth.json')}
+          className="w-60 h-60"
+          autoPlay
+          loop
         />
       </View>
       <View className="px-4 space-y-3">
@@ -140,11 +154,11 @@ export default function HomeScreen() {
                     }>
                     <Image source={randomImage()} className="w-36 h-36 mb-2" />
                     <View className="justify-center items-center mb-2">
-                      <Text className={`${colors.heading} font-bold`}>
+                      <Text className={`${colors.heading} font-bold text-xl`}>
                         {item.place}
                       </Text>
                       <Text
-                        className={`${colors.heading} text-md font-semibold`}>
+                        className={`${colors.heading} font-semibold text-lg`}>
                         {item.country}
                       </Text>
                     </View>

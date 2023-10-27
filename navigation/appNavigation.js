@@ -26,7 +26,8 @@ export default function AppNavigation() {
       try {
         const userAccessToken = await AsyncStorage.getItem('userAccessToken');
         if (userAccessToken) {
-          dispatch(setUser(userAccessToken));
+          // dispatch(setUser(userAccessToken));
+          console.log('User');
         }
       } catch (error) {
         console.error('Error retrieving user access token:', error);

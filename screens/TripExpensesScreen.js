@@ -1,4 +1,11 @@
-import {View, Text, TouchableOpacity, Image, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  Share,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import ScreenWrapper from '../components/screenWrapper';
 import {colors} from '../theme';
@@ -9,6 +16,7 @@ import BackButton from '../components/backButton';
 import ExpenseCard from '../components/expenseCard';
 import {getDocs, query, where, doc, deleteDoc} from 'firebase/firestore';
 import {expensesRef} from '../config/firebase';
+import {ShareIcon} from 'react-native-heroicons/outline';
 
 // Dummy Data
 // const items = [
@@ -65,13 +73,36 @@ export default function TripExpensesScreen(props) {
       console.error('Error removing expense:', error);
     }
   };
+
+  // Share function
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: `I'm sharing details about my trip ${place}, ${country}.`,
+        title: 'Share Trip Details',
+        url: 'https://www.example.com',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
   useEffect(() => {
     if (isFocused) fetchExpenses();
   }, [isFocused]);
   return (
     <ScreenWrapper className="flex-1">
       <View className="px-4">
-        <View className="relative mt-5">
+        <View className="relative mt-5 ">
           <View className="absolute top-2 left-0 z-10">
             <BackButton />
           </View>
@@ -79,10 +110,16 @@ export default function TripExpensesScreen(props) {
             <Text className={`${colors.heading} text-xl font-bold text-center`}>
               {place}
             </Text>
-            <Text className={`${colors.heading} text-xs text-center`}>
+            <Text
+              className={`${colors.heading} text-sm text-center font-semibold`}>
               {country}
             </Text>
           </View>
+          <TouchableOpacity
+            className="absolute top-3.5 right-0 z-10"
+            onPress={onShare}>
+            <ShareIcon color={'black'} size={24} />
+          </TouchableOpacity>
         </View>
         <View className="flex-row justify-center items-center rounded-xl mb-4">
           <Image
@@ -107,7 +144,7 @@ export default function TripExpensesScreen(props) {
             <FlatList
               data={expenses}
               ListEmptyComponent={
-                <EmptyList message={"You haven't recorded any expenses yet"} />
+                <EmptyList message={"You haven't recorded any task yet"} />
               }
               keyExtractor={item => item.id}
               showsVerticalScrollIndicator={false}

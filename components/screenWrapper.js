@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function ScreenWrapper({children}) {
   let statusBarHeight = StatusBar.currentHeight
-    ? StatusBar.currentHeight - 20
+    ? StatusBar.currentHeight - 10
     : Platform.OS == 'ios'
     ? 30
     : 0;

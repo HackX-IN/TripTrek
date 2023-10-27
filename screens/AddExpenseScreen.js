@@ -104,7 +104,7 @@ export default function AddTripScreen(props) {
             </View>
 
             <Text className={`${colors.heading} text-xl font-bold text-center`}>
-              Add Expense
+              Add Task
             </Text>
           </View>
 
