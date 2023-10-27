@@ -1,14 +1,4 @@
-# Expensify-React-Native-App
-
-![Image](https://cdn.dribbble.com/userupload/5642332/file/original-8ea1b6243550cf8f8eae0248dff4c9f9.png?compress=1&resize=2048x1536)
-
- <p align="left">
-    <a href="https://www.youtube.com/channel/UCILovaLl2fUPAww1bGJ4sJQ?sub_confirmation=1"><img alt="Youtube" title="Youtube"   src="https://img.shields.io/badge/-Subscribe-red?style=for-the-badge&logo=youtube&logoColor=white"/></a>
-    <p>
-      Watch Tutorial on YouTube <a href="https://www.youtube.com/playlist?list=PLKWMD009Q4qTGuqXxRq51f8OoDaIoJ1yo" target="_blank">Expensify App in React Native</a>
-    </p>
-    
-  </p>
+# TripTrek-React-Native-App
 
 ## Get Started
 
@@ -21,6 +11,7 @@ install dev dependencies
 Run The app
 
 ### `npm start` or `yarn start`
+
 ### `cd ios` and `pod install`
 
 Runs your app in development mode.
@@ -37,12 +28,4 @@ Like `npm start` / `yarn start`, but also attempts to open your app on a connect
 
 <br />
 
-💙 If you like this project, give it a ⭐ and share it with friends!
-
-<p align="left">
-  <a href="https://www.youtube.com/channel/UCILovaLl2fUPAww1bGJ4sJQ?sub_confirmation=1"><img alt="Youtube" title="Youtube" src="https://img.shields.io/badge/-Subscribe-red?style=for-the-badge&logo=youtube&logoColor=white"/></a>
-  <a href="https://twitter.com/code_with_nomi"><img alt="Twitter" title="Twitter" src="https://img.shields.io/badge/-Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"/></a>
-</p>
-
-<a href="https://www.buymeacoffee.com/syednoman">☕ Buy me a coffee</a>
 # TripTrek
